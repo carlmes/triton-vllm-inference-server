@@ -25,3 +25,4 @@ Container project for NVIDIA Triton using vLLM backend
 - https://github.com/triton-inference-server/vllm_backend
 - https://github.com/run-ai/runai-samples/blob/main/Dockerfiles/Triton%20Inference%20Server/Dockerfile
 - https://github.com/triton-inference-server/server
+- Downloading a model from HugguingFace: https://github.com/cfchase/basic-kserve-vllm/blob/main/1_download_save.ipynb
