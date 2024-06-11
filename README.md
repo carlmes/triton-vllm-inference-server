@@ -5,7 +5,7 @@ Container project for NVIDIA Triton using vLLM backend
 
 * NVIDIA Docs: [Triton Inference Server Quickstart](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/getting_started/quickstart.html)
 * Github: [NVIDIA Triton Inference Server Organization](https://github.com/triton-inference-server/)
-** [Deploying a vLLM model in Triton](https://github.com/triton-inference-server/tutorials/blob/main/Quick_Deploy/vLLM/README.md#deploying-a-vllm-model-in-triton)
+  + [Deploying a vLLM model in Triton](https://github.com/triton-inference-server/tutorials/blob/main/Quick_Deploy/vLLM/README.md#deploying-a-vllm-model-in-triton)
 * Run:AI: Sample [Triton Inference Server](https://github.com/run-ai/runai-samples/tree/main/Dockerfiles/Triton%20Inference%20Server)
 * Run:AI: [Quickstart: Launch an Inference Workload](https://docs.run.ai/v2.17/Researcher/Walkthroughs/quickstart-inference/)
 
