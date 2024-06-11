@@ -7,4 +7,4 @@ RUN cd / && \
 
 EXPOSE 8000 8001 8002
 
-ENTRYPOINT ["/opt/tritonserver/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
+ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
