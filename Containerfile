@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tritonserver:24.05-vllm-python-py3
+FROM nvcr.io/nvidia/tritonserver:23.10-vllm-python-py3
 
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
 COPY s2i/bin/ ${STI_SCRIPTS_PATH}
@@ -16,23 +16,24 @@ ENV PATH=${APP_ROOT}/bin:${PATH} \
     HOME=${APP_ROOT} \
     MODEL_REPOSITORY=${APP_ROOT}/models
 
+COPY default_model_repository/ ${APP_ROOT}/default_model_repository
+
 WORKDIR ${APP_ROOT}/src
 
 # Install git lfs, as required for downloading from Huggingface
 # https://huggingface.co/docs/hub/models-downloading#using-git
 # https://github.com/git-lfs/git-lfs/wiki/Installation#debian-and-ubuntu 
-RUN apt-get update && \
-    apt-get install git-lfs && \
-    git lfs install
+#RUN apt-get update && \
+#    apt-get install git-lfs && \
+#    git lfs install
 
 USER 1001
 
 ENV HOME=${APP_ROOT}/src \
-    HF_USER=${HF_USER} \
-    HF_TOKEN=${HF_TOKEN}
+    HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN}
 
-RUN mkdir -p ~/.ssh && \
-    ssh-keyscan -t rsa hf.co >> ~/.ssh/known_hosts
+#RUN mkdir -p ~/.ssh && \
+#    ssh-keyscan -t rsa hf.co >> ~/.ssh/known_hosts
 
 EXPOSE 8000 8001 8002
 

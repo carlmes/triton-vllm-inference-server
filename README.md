@@ -8,12 +8,17 @@ $ podman build -t "triton-vllm-inference-server" .
 ```
 
 ```sh
-$ mkdir $HOME/Downloads/models
+$ mkdir $HOME/Downloads/model_repository
 
-$ podman run --rm -p 8000:8000 --name "triton-vllm-inference-server" -v $HOME/Downloads/models:/opt/app-root/models -e HF_USER=<HuggingFace User Name> -e HF_TOKEN=<HuggingFace Token> triton-vllm-inference-server
+$ podman run --rm -p 8000:8000 --name "triton-vllm-inference-server" -v $HOME/Downloads/model_repository:/opt/app-root/models --env HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN --shm-size=1G --ulimit memlock=-1 --ulimit stack=67108864 --gpus all triton-vllm-inference-server
 ```
 
 HuggingFace Tokens: https://huggingface.co/settings/tokens
+
+Alternative direct run, from https://github.com/triton-inference-server/server/issues/6578
+```sh
+$ podman run --env HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN -it --net=host --rm -p 8001:8001 --shm-size=1G --ulimit memlock=-1 --ulimit stack=67108864 -v ${PWD}:/work -w /work nvcr.io/nvidia/tritonserver:23.10-vllm-python-py3 tritonserver --model-store ./model_repository
+```
 
 ## Building on Quay, Running using OpenShift
 

@@ -1,0 +1,5 @@
+{
+    "model": "meta-llama/Llama-2-7b-chat-hf",
+    "disable_log_requests": "true",
+    "gpu_memory_utilization": 0.8 
+}
