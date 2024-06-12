@@ -18,7 +18,18 @@ cd ${MODEL_REPOSITORY:-$HOME/models}
 git lfs --version
 echo "HuggingFace User: ${HF_USER}"
 echo "HuggingFace Token: ${HF_TOKEN}"
-git clone https://${HF_USER}:${HF_TOKEN}@huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
+if [ ! -d "Mistral-7B-Instruct-v0.3" ]; then
+    echo "Model not found, downloading from HuggingFace..."
+    git clone https://${HF_USER}:${HF_TOKEN}@huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
+    cd Mistral-7B-Instruct-v0.3
+else
+    echo "Model already downloaded, validating against latest in HuggingFace..."
+    cd Mistral-7B-Instruct-v0.3
+    git pull origin
+fi
+# https://github.com/triton-inference-server/server/issues/3623
+mkdir 1
+
 
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
 cd $HOME
