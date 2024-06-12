@@ -1,6 +1,18 @@
 # triton-vllm-inference-server
 Container project for NVIDIA Triton using vLLM backend
 
+## Building and Running Locally using Podman
+
+```sh
+$ podman build -t "triton-vllm-inference-server" . 
+```
+
+```sh
+$ mkdir $HOME/Downloads/models
+
+$ podman run --rm -p 8000:8000 --name "triton-vllm-inference-server" -v $HOME/Downloads/models:/models triton-vllm-inference-server
+```
+
 ## References
 
 * Triton Inference Server: [vLLM Backend](https://github.com/triton-inference-server/vllm_backend)
