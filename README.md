@@ -1,6 +1,19 @@
 # triton-vllm-inference-server
 Container project for NVIDIA Triton using vLLM backend
 
+## Downloading Models
+
+Before building with podman, we will download the Llama models into a folder:
+```sh
+$ mkdir models
+
+$ git clone https://PrivateX:${HUGGING_FACE_HUB_TOKEN}@huggingface.co/meta-llama/Llama-2-7b-chat-hf
+
+$ git clone https://PrivateX:${HUGGING_FACE_HUB_TOKEN}@huggingface.co/meta-llama/Llama-2-7b-hf 
+```
+
+We can also get the Llama models from meta by following these instructions: https://github.com/meta-llama/llama#download
+
 ## Building and Running Locally using Podman
 
 ```sh

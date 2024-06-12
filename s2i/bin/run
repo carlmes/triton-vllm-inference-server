@@ -31,16 +31,22 @@ $STI_SCRIPTS_PATH/usage
 #    mkdir 1
 #fi
 
+# Download meta-llama/Llama-2-7b-chat-hf from HuggingFace
+#cd ${APP_ROOT}/models
+#git lfs --version
+#git clone https://${HUGGING_FACE_HUB_TOKEN}@huggingface.co/meta-llama/Llama-2-7b-chat-hf
+#cd Mistral-7B-Instruct-v0.3
+
 # If the model repository is blank, then initialize it from the default
-cd ${MODEL_REPOSITORY:-$HOME/models}
-if [ ! -d "vllm_model" ]; then
-    echo "Model repository is empty, initializing from $APP_ROOT/default_model_repository"
-    cp -r $APP_ROOT/default_model_repository/vllm_model ./vllm_model
-fi
+#cd ${MODEL_REPOSITORY:-$HOME/models}
+#if [ ! -d "vllm_model" ]; then
+#    echo "Model repository is empty, initializing from $APP_ROOT/default_model_repository"
+#    cp -r $APP_ROOT/default_model_repository/vllm_model ./vllm_model
+#fi
 
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
 cd $HOME
 tritonserver \
-  --model-repository=${MODEL_REPOSITORY:-$HOME/models} \
+  --model-repository=${MODEL_REPOSITORY:-$APP_ROOT/model_repository} \
   --model-control-mode=poll \
   --repository-poll-secs=60
