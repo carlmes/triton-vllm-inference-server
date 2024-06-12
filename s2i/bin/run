@@ -7,14 +7,22 @@ set -e
 $STI_SCRIPTS_PATH/usage
 
 # Download NVIDIA sample models from GitHub
-cd ${MODEL_REPOSITORY:-$HOME} 
-git clone https://github.com/triton-inference-server/server.git triton-inference-server
-cd ${MODEL_REPOSITORY:-$HOME}/triton-inference-server/docs/examples
-./fetch_models.sh
+#cd ${MODEL_REPOSITORY:-$HOME/models} 
+#git clone https://github.com/triton-inference-server/server.git triton-inference-server
+#cd ${MODEL_REPOSITORY:-$HOME}/triton-inference-server/docs/examples
+#./fetch_models.sh
+
+# Download model from Huggingface: 
+# https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
+cd ${MODEL_REPOSITORY:-$HOME/models} 
+git lfs --version
+echo "HuggingFace User: ${HF_USER}"
+echo "HuggingFace Token: ${HF_TOKEN}"
+git clone https://${HF_USER}:${HF_TOKEN}@huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
 
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
 cd $HOME
 tritonserver \
-  --model-repository=${MODEL_REPOSITORY:-$HOME/triton-inference-server/docs/examples/model_repository} \
+  --model-repository=${MODEL_REPOSITORY:-$HOME/models} \
   --model-control-mode=poll \
   --repository-poll-secs=60

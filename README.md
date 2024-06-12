@@ -10,8 +10,20 @@ $ podman build -t "triton-vllm-inference-server" .
 ```sh
 $ mkdir $HOME/Downloads/models
 
-$ podman run --rm -p 8000:8000 --name "triton-vllm-inference-server" -v $HOME/Downloads/models:/models triton-vllm-inference-server
+$ podman run --rm -p 8000:8000 --name "triton-vllm-inference-server" -v $HOME/Downloads/models:/opt/app-root/models -e HF_USER=<HuggingFace User Name> -e HF_TOKEN=<HuggingFace Token> triton-vllm-inference-server
 ```
+
+HuggingFace Tokens: https://huggingface.co/settings/tokens
+
+## Building on Quay, Running using OpenShift
+
+> Note: Under Construction
+
+See examples at: https://github.com/codekow/s2i-patch/blob/main/s2i-triton/README.md
+
+## Running using Run:AI
+
+> Note: Under Construction
 
 ## References
 
