@@ -1,51 +1,11 @@
 #!/bin/bash
-# source /opt/app-root/etc/generate_container_user
-
 set -e
 
 # display usage
 $STI_SCRIPTS_PATH/usage
 
-# Download NVIDIA sample models from GitHub
-#cd ${MODEL_REPOSITORY:-$HOME/models} 
-#git clone https://github.com/triton-inference-server/server.git triton-inference-server
-#cd ${MODEL_REPOSITORY:-$HOME}/triton-inference-server/docs/examples
-#./fetch_models.sh
-
-# Download model from Huggingface: 
-# https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
-#cd ${MODEL_REPOSITORY:-$HOME/models} 
-#git lfs --version
-#echo "HuggingFace Token: ${HUGGING_FACE_HUB_TOKEN}"
-#if [ ! -d "Mistral-7B-Instruct-v0.3" ]; then
-#    echo "Model not found, downloading from HuggingFace..."
-#    git clone https://${HUGGING_FACE_HUB_TOKEN}@huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
-#    cd Mistral-7B-Instruct-v0.3
-#else
-#    echo "Model already downloaded, validating against latest in HuggingFace..."
-#    cd Mistral-7B-Instruct-v0.3
-#    git pull origin
-#fi
-# https://github.com/triton-inference-server/vllm_backend/tree/main/samples/model_repository/vllm_model
-#if [ ! -d "1" ]; then
-#    mkdir 1
-#fi
-
-# Download meta-llama/Llama-2-7b-chat-hf from HuggingFace
-#cd ${APP_ROOT}/models
-#git lfs --version
-#git clone https://${HUGGING_FACE_HUB_TOKEN}@huggingface.co/meta-llama/Llama-2-7b-chat-hf
-#cd Mistral-7B-Instruct-v0.3
-
-# If the model repository is blank, then initialize it from the default
-#cd ${MODEL_REPOSITORY:-$HOME/models}
-#if [ ! -d "vllm_model" ]; then
-#    echo "Model repository is empty, initializing from $APP_ROOT/default_model_repository"
-#    cp -r $APP_ROOT/default_model_repository/vllm_model ./vllm_model
-#fi
-
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
-cd $HOME
+cd $MODEL_REPOSITORY
 tritonserver \
   --model-repository=${MODEL_REPOSITORY:-$APP_ROOT/model_repository} \
   --model-control-mode=poll \
