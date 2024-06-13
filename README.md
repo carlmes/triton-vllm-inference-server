@@ -37,7 +37,7 @@ Here are example files that work with the Llama-2-7B-hf model:
 ```
 
 **config.pbtxt**
-```json
+```
 backend: "vllm"
 
 instance_group [
@@ -110,6 +110,14 @@ $ podman run --env HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN -it --net=host
 > Note: Under Construction
 
 See examples at: https://github.com/codekow/s2i-patch/blob/main/s2i-triton/README.md
+
+> TODO: Add instructions for creating a Deployment, defining a PV and binding to the pod, creating a service and route.
+
+Once the pod is started, copy the contents of the `model_repository` to the PV bound to the running pod:
+
+```sh
+$  oc rsync ~/Downloads/model_repository triton-vllm-inference-server-784d54f45f-jwr25:/opt/app-root/ --strategy=tar --progress=true
+```
 
 ## Running using Run:AI
 

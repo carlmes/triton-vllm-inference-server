@@ -7,14 +7,14 @@ COPY usr/ /usr/
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/app-root
 
-RUN mkdir -p ${APP_ROOT}/{bin,src,model_repository} && \
+RUN mkdir -p ${APP_ROOT}/{bin,src} && \
     chmod -R u+x ${APP_ROOT}/bin && \
     chgrp -R 0 ${APP_ROOT} && \
     chmod -R g=u ${APP_ROOT}
 
 ENV PATH=${APP_ROOT}/bin:${PATH} \
     HOME=${APP_ROOT} \
-    MODEL_REPOSITORY=${APP_ROOT}/model_repository
+    MODEL_REPOSITORY=${APP_ROOT}/mnt/model_repository
 
 WORKDIR ${APP_ROOT}/src
 
