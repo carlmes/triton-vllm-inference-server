@@ -25,8 +25,8 @@ RUN apt-get update && \
     apt-get install git-lfs && \
     git lfs install
 
-#USER 1001
-USER 1000910000
+USER 1001
+#USER 1000910000
 
 ENV HOME=${APP_ROOT}/src
 
