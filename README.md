@@ -119,6 +119,11 @@ Once the pod is started, copy the contents of the `model_repository` to the PV b
 $  oc rsync ~/Downloads/model_repository triton-vllm-inference-server-784d54f45f-jwr25:/opt/app-root/ --strategy=tar --progress=true
 ```
 
+Testing the running instance
+```sh
+$ curl -X POST https://triton-vllm-inference-server-triton-vllm-inference-server.apps.cluster-4b2f6.sandbox888.opentlc.com/v2/models/vllm_model/generate -d '{"text_input": "What is Triton Inference Server?", "parameters": {"stream": false, "temperature": 0}}'
+```
+
 ## Running using Run:AI
 
 > Note: Under Construction
