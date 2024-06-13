@@ -111,7 +111,7 @@ $ podman run --env HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN -it --net=host
 
 See examples at: https://github.com/codekow/s2i-patch/blob/main/s2i-triton/README.md
 
-> TODO: Add instructions for creating a Deployment, defining a PV and binding to the pod, creating a service and route.
+> TODO: Add instructions for creating a Deployment, defining a PV and binding to the pod, creating a service and route. Also securityContext for read write access on PV
 
 Once the pod is started, copy the contents of the `model_repository` to the PV bound to the running pod:
 

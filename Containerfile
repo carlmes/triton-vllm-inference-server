@@ -7,7 +7,7 @@ COPY usr/ /usr/
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/app-root
 
-RUN mkdir -p ${APP_ROOT}/{bin,src} && \
+RUN mkdir -p ${APP_ROOT}/{bin,src,mnt/model_repository} && \
     chmod -R u+x ${APP_ROOT}/bin && \
     chgrp -R 0 ${APP_ROOT} && \
     chmod -R g=u ${APP_ROOT}
@@ -17,6 +17,13 @@ ENV PATH=${APP_ROOT}/bin:${PATH} \
     MODEL_REPOSITORY=${APP_ROOT}/mnt/model_repository
 
 WORKDIR ${APP_ROOT}/src
+
+# Install git lfs, as required for downloading from Huggingface
+# https://huggingface.co/docs/hub/models-downloading#using-git
+# https://github.com/git-lfs/git-lfs/wiki/Installation#debian-and-ubuntu 
+RUN apt-get update && \
+    apt-get install git-lfs && \
+    git lfs install
 
 USER 1001
 

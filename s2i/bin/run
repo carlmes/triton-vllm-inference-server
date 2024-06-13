@@ -4,6 +4,13 @@ set -e
 # display usage
 $STI_SCRIPTS_PATH/usage
 
+# If the model_repository directory doesnt exist, create it
+# This issue occurs when a PV is mounted, and the directory initialized
+# in the Containerfile is overlayed with an empty folder in the pv
+if [ ! -d "$MODEL_REPOSITORY" ]; then
+  mkdir -p $MODEL_REPOSITORY
+fi
+
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
 cd $MODEL_REPOSITORY
 tritonserver \
