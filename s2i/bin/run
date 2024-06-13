@@ -11,6 +11,8 @@ if [ ! -d "$MODEL_REPOSITORY" ]; then
   mkdir -p $MODEL_REPOSITORY
 fi
 
+export TRANSFORMERS_CACHE=$APP_ROOT/mnt
+
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
 cd $MODEL_REPOSITORY
 tritonserver \
