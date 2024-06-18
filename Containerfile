@@ -12,7 +12,10 @@ ENV APP_ROOT=/opt/app-root
 # https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/model_repository.html
 VOLUME [ "/models" ]
 
-RUN mkdir -p ${APP_ROOT}/{bin,src} && \
+RUN chmod -R u+x ${STI_SCRIPTS_PATH} && \
+    chgrp -R 0 ${STI_SCRIPTS_PATH} && \
+    chmod -R g=u ${STI_SCRIPTS_PATH} && \
+    mkdir -p ${APP_ROOT}/{bin,src} && \
     chmod -R u+x ${APP_ROOT}/bin && \
     chgrp -R 0 ${APP_ROOT} && \
     chmod -R g=u ${APP_ROOT}
