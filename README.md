@@ -30,7 +30,7 @@ Here are example files that work with the Llama-2-7B-hf model:
 ```json
 
 {
-    "model": "/opt/app-root/model_repository/vllm_model/Llama-2-7b-hf",
+    "model": "/opt/app-root/mnt/model_repository/vllm_model/Llama-2-7b-hf",
     "disable_log_requests": "true",
     "gpu_memory_utilization": 1
 }
