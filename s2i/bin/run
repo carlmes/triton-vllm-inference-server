@@ -4,12 +4,11 @@ set -e
 # display usage
 $STI_SCRIPTS_PATH/usage
 
-export MODEL_REPOSITORY=/models/model_repository
-
 # If the model_repository directory doesnt exist, create it
-# This issue occurs when a PV is mounted, and the directory initialized
-# in the Containerfile is overlayed with an empty folder in the pv
+# This prevents a contain crash when a PV is mounted, but the directory 
+# overlayed with an empty folder in from a brand new PV
 if [ ! -d "$MODEL_REPOSITORY" ]; then
+  echo "Creating a new empty model repository at: ${MODEL_REPOSITORY}"
   mkdir -p $MODEL_REPOSITORY
 fi
 
@@ -20,7 +19,6 @@ fi
 # export TRITON_AWS_MOUNT_DIRECTORY=...
 
 # ENTRYPOINT ["/opt/nvidia/nvidia_entrypoint.sh", "tritonserver", "--model-repository", "/triton-inference-server/docs/examples/model_repository"]
-cd $MODEL_REPOSITORY
 tritonserver \
   --model-repository=${MODEL_REPOSITORY} \
   --model-control-mode=poll \
