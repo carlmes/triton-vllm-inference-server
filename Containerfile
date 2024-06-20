@@ -24,13 +24,18 @@ VOLUME [ "/opt/app-root/models", "/opt/app-root/model_repository" ]
 
 USER 1001
 
-WORKDIR ${APP_ROOT}
+# We will use the model_repository PV as our user home directory, allowing
+# Triton to persist model caches for subsequent fast startup.
+WORKDIR ${APP_ROOT}/model_repository
 
 ENV PATH=${APP_ROOT}/bin:${PATH} \
-    HOME=${APP_ROOT} \
+    HOME=${APP_ROOT}/model_repository \
     MODEL_REPOSITORY=${APP_ROOT}/model_repository \
     MODEL_SOURCE=${APP_ROOT}/models
 
+# 8000: REST Interface
+# 8001: gRPC Interface
+# 8002: Model performance monitoring
 EXPOSE 8000 8001 8002
 
 # ENTRYPOINT /opt/nvidia/nvidia_entrypoint.sh
